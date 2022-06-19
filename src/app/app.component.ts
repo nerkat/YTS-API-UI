@@ -18,8 +18,8 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    this.http.get("https://yts.mx/api/v2/list_movies.json?quality=1080p?minimum_rating=6&limit=7").subscribe((data: any) => {
-      // this.http.get("https://yts.mx/api/v2/list_movies.json?quality=1080p?minimum_rating=6&limit=100").subscribe((data: any) => {
+    // this.http.get("https://yts.mx/api/v2/list_movies.json?quality=1080p?minimum_rating=6&limit=7").subscribe((data: any) => {
+      this.http.get("https://yts.mx/api/v2/list_movies.json?quality=1080p?minimum_rating=6&limit=50&sort_by=download_count").subscribe((data: any) => {
 
       this.movies = data.data.movies;
       console.log(this.movies);
@@ -40,5 +40,9 @@ export class AppComponent {
 
   getDate(movie: any) {
     return new Date(movie.date_uploaded_unix * 1000);
+  }
+
+  getYoutube(movie: any) {
+    return "https://www.youtube.com/watch?v=" + movie.yt_trailer_code;
   }
 }

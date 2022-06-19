@@ -4,28 +4,41 @@
       <img src="{{movie.large_cover_image}}" (click)="movie.flip=true" />
     </div>
     <div class="back">
+      <div class="bg" [ngStyle]="{'background-image': 'url(' + movie.background_image + ')'}"></div>
       <div class="back-btn" (click)="movie.flip=false">
-        <svg-icon src="assets/images/back.svg" [svgStyle]="{ 'width.px':90 }"></svg-icon>
+        <img src="assets/images/back.svg">
       </div>
-      <span class="rating">{{movie.rating}}</span>
+      <div class="rating">
+        {{movie.rating}}
+        <img src="assets/images/star.svg">
+      </div>
+      <div class="runtime">
+        {{movie.runtime}} Min
+        <img src="assets/images/time.svg">
+      </div>
 
       <div class="info_section">
         <div class="movie_header">
           <h1>{{movie.title}}</h1>
-          <h4>{{movie.year}}</h4>
-          <span>{{getDate(movie) | date: 'MMM d, y'}}</span>
-          <span class="minutes">{{movie.runtime}} Min</span>
-          <p class="type">{{movie.genres}}</p>
+          <!-- <span>{{getDate(movie) | date: 'MMM d, y'}}</span> -->
         </div>
         <div class="movie_desc">
-          <p class="text" [innerHTML]="(movie.description_full | slice:0:200 )+ '...'">
+          <p class="text" [innerHTML]="(movie.description_full | slice:0:350 ) + '...'">
           </p>
         </div>
+        <div class="year">
+          {{movie.year}}
+        </div>
+        <div class="type">
+          <span *ngFor="let type of movie.genres; let last = last">{{type}}<span *ngIf="!last">, </span></span>
+        </div>
         <a class="magnet" [href]="getMagnet(movie)">
-          download
+          <img src="assets/images/magnet.svg">
+        </a>
+        <a *ngIf="movie.yt_trailer_code" target="_blank" class="youtube" [href]="getYoutube(movie)">
+          <img src="assets/images/youtube.svg">
         </a>
       </div>
-      <div class="blur_back" [ngStyle]="{'background-image': 'url(' + movie.background_image + ')'}"></div>
     </div>
   </div>
 </div>
