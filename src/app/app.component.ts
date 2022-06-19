@@ -16,6 +16,7 @@ export class AppComponent {
   title = 'YTSS';
   movies: any = [];
   filterdMovies: any = [];
+  loading: boolean = true;
 
   constructor(private http: HttpClient, private sanitizer: DomSanitizer) {
   }
@@ -29,12 +30,19 @@ export class AppComponent {
   getMovies(page: any) {
     this.http.get("https://yts.mx/api/v2/list_movies.json?quality=1080p&minimum_rating=6&limit=50&sort_by=date_added&page=" + page).subscribe((data: any) => {
       this.movies = [...this.movies, ...data.data.movies];
+      this.movies = this.removeDuplicates(this.movies, "id");
       this.movies.sort((a: any, b: any) => (a.year > b.year) ? -1 : 1)
       console.log(this.movies);
-      if (page < 6) {
+
+      if (page < 3) {
         this.getMovies(page + 1);
       }
-      this.filterdMovies = this.movies;
+
+      else {
+        this.filterdMovies = this.movies;
+        this.loading = false;
+      }
+
     })
   }
 
@@ -68,5 +76,19 @@ export class AppComponent {
       return movie.title.toLowerCase().includes(query.toLowerCase());
     });
 
+  }
+
+  removeDuplicates(originalArray: any, prop: any) {
+    var newArray = [];
+    var lookupObject: any = {};
+
+    for (var i in originalArray) {
+      lookupObject[originalArray[i][prop]] = originalArray[i];
+    }
+
+    for (i in lookupObject) {
+      newArray.push(lookupObject[i]);
+    }
+    return newArray;
   }
 }
