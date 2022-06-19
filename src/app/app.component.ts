@@ -19,7 +19,7 @@ export class AppComponent {
 
   ngOnInit() {
     // this.http.get("https://yts.mx/api/v2/list_movies.json?quality=1080p?minimum_rating=6&limit=7").subscribe((data: any) => {
-      this.http.get("https://yts.mx/api/v2/list_movies.json?quality=1080p?minimum_rating=6&limit=50&sort_by=download_count").subscribe((data: any) => {
+      this.http.get("https://yts.mx/api/v2/list_movies.json?quality=1080p?minimum_rating=6&limit=50&sort_by=date_added").subscribe((data: any) => {
 
       this.movies = data.data.movies;
       console.log(this.movies);
