@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { DomSanitizer } from '@angular/platform-browser';
 
+
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -13,19 +15,27 @@ export class AppComponent {
 
   title = 'YTSS';
   movies: any = [];
+  filterdMovies: any = [];
 
   constructor(private http: HttpClient, private sanitizer: DomSanitizer) {
   }
 
   ngOnInit() {
-    // this.http.get("https://yts.mx/api/v2/list_movies.json?quality=1080p?minimum_rating=6&limit=7").subscribe((data: any) => {
-      this.http.get("https://yts.mx/api/v2/list_movies.json?quality=1080p?minimum_rating=6&limit=50&sort_by=date_added").subscribe((data: any) => {
 
-      this.movies = data.data.movies;
+    this.getMovies(0);
+
+  }
+
+  getMovies(page: any) {
+    this.http.get("https://yts.mx/api/v2/list_movies.json?quality=1080p&minimum_rating=6&limit=50&sort_by=date_added&page=" + page).subscribe((data: any) => {
+      this.movies = [...this.movies, ...data.data.movies];
+      this.movies.sort((a: any, b: any) => (a.year > b.year) ? -1 : 1)
       console.log(this.movies);
-
+      if (page < 6) {
+        this.getMovies(page + 1);
+      }
+      this.filterdMovies = this.movies;
     })
-
   }
 
   getMagnet(movie: any) {
@@ -44,5 +54,19 @@ export class AppComponent {
 
   getYoutube(movie: any) {
     return "https://www.youtube.com/watch?v=" + movie.yt_trailer_code;
+  }
+
+  getImdb(movie: any) {
+    return "https://www.imdb.com/title/" + movie.imdb_code;
+  }
+
+  filterMovies(query: any) {
+    if (!query || query == "") {
+      this.filterdMovies = this.movies;
+    }
+    this.filterdMovies = this.movies.filter(function (movie: any) {
+      return movie.title.toLowerCase().includes(query.toLowerCase());
+    });
+
   }
 }

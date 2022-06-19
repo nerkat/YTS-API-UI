@@ -1,5 +1,11 @@
+<div class="search">
+  <div>
+    <input type="text" #search (keyup)="filterMovies(search.value)" placeholder="Search by Movie Title...">
+    <img src="assets/images/glass.svg">
+  </div>
+</div>
 <div class="movies">
-  <div *ngFor="let movie of movies" class="movie_card" id="{{movie.id}}" [ngClass]="{'flipped': movie.flip}">
+  <div *ngFor="let movie of filterdMovies" class="movie_card" id="{{movie.id}}" [ngClass]="{'flipped': movie.flip}">
     <div class="front">
       <img src="{{movie.large_cover_image}}" (click)="movie.flip=true" />
     </div>
@@ -12,7 +18,7 @@
         {{movie.rating}}
         <img src="assets/images/star.svg">
       </div>
-      <div class="runtime">
+      <div class="runtime" *ngIf="movie.runtime!=0">
         {{movie.runtime}} Min
         <img src="assets/images/time.svg">
       </div>
@@ -30,8 +36,12 @@
           {{movie.year}}
         </div>
         <div class="type">
-          <span *ngFor="let type of movie.genres | slice:0:3; let last = last">{{type}}<span *ngIf="!last">, </span></span>
+          <span *ngFor="let type of movie.genres | slice:0:2; let last = last">{{type}}<span *ngIf="!last">,
+            </span></span>
         </div>
+        <a class="imdb" [href]="getImdb(movie)">
+          <img src="assets/images/imdb.svg">
+        </a>
         <a class="magnet" [href]="getMagnet(movie)">
           <img src="assets/images/magnet.svg">
         </a>
