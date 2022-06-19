@@ -5,21 +5,23 @@
     </div>
     <div class="back">
       <div class="back-btn" (click)="movie.flip=false">
-        &#8249;
+        <svg-icon src="assets/images/back.svg" [svgStyle]="{ 'width.px':90 }"></svg-icon>
       </div>
+      <span class="rating">{{movie.rating}}</span>
+
       <div class="info_section">
         <div class="movie_header">
           <h1>{{movie.title}}</h1>
-          <h4>{{movie.year}}, {{movie.rating}}, {{movie.date_uploaded}}</h4>
+          <h4>{{movie.year}}</h4>
+          <span>{{getDate(movie) | date: 'MMM d, y'}}</span>
           <span class="minutes">{{movie.runtime}} Min</span>
           <p class="type">{{movie.genres}}</p>
         </div>
         <div class="movie_desc">
-          <p class="text" [innerHTML]="movie.description_full">
+          <p class="text" [innerHTML]="(movie.description_full | slice:0:200 )+ '...'">
           </p>
         </div>
-        <a class="magnet"
-          [href]="getMagnet(movie)">
+        <a class="magnet" [href]="getMagnet(movie)">
           download
         </a>
       </div>

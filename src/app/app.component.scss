@@ -48,15 +48,28 @@
 
         .back-btn {
             font-size: 45px;
+            display: inline-flex;
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            top: -9px;
+            left: 12px;
+        }
+
+        .rating {
+            position: absolute;
+            top: 10px;
+            right: 10px;
         }
 
         .info_section {
             .movie_header {
 
 
-                h1 {}
-
-                h4 {}
+                h1 {
+                    font-size: 24px;
+                    margin: 25px 0 0 0;
+                }
 
                 .minutes {}
 
