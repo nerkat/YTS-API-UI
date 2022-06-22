@@ -1,65 +1,96 @@
-<div class="search">
-  <div>
-    <input type="text" #search (keyup)="filterMovies(search.value)" placeholder="Search by Movie Title...">
-    <img src="assets/images/glass.svg">
-  </div>
-</div>
-<div [hidden]="!loading">
-  <div class="container">
-    <div class="loader-spinner">
-      <svg viewBox="0 0 120 120" version="1.1" xmlns="http://www.w3.org/2000/svg">
-        <circle class="load one" cx="60" cy="60" r="20" pathLength="1" />
-        <circle class="load two" cx="60" cy="60" r="10" />
-        <circle class="load three" cx="60" cy="60" r="30" pathLength="1" />
-      </svg>
-    </div>
-  </div>
-</div>
-<div class="movies" [hidden]="loading">
-  <div *ngFor="let movie of filterdMovies" class="movie_card" id="{{movie.id}}" [ngClass]="{'flipped': movie.flip}">
-    <div class="front">
-      <img src="{{movie.large_cover_image}}" (click)="movie.flip=true" />
-    </div>
-    <div class="back">
-      <div class="bg" [ngStyle]="{'background-image': 'url(' + movie.background_image + ')'}"></div>
-      <div class="back-btn" (click)="movie.flip=false">
-        <img src="assets/images/back.svg">
-      </div>
-      <div class="rating">
-        {{movie.rating}}
-        <img src="assets/images/star.svg">
-      </div>
-      <div class="runtime" *ngIf="movie.runtime!=0">
-        {{movie.runtime}} Min
-        <img src="assets/images/time.svg">
-      </div>
+<mat-toolbar>
+  <button mat-icon-button (click)="drawer.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span class="example-spacer">
+  </span>
+  <mat-form-field floatLabel="never">
+    <mat-label>Search Movie...</mat-label>
+    <input matInput type="text" [(ngModel)]="query"
+      (keyup)="loading = true; releaseYear = 1900; movies = []; getMovies(0)">
+  </mat-form-field>
+  <mat-icon>search</mat-icon>
+</mat-toolbar>
 
-      <div class="info_section">
-        <div class="movie_header">
-          <h1>{{movie.title}}</h1>
-          <!-- <span>{{getDate(movie) | date: 'MMM d, y'}}</span> -->
+
+<mat-drawer-container autosize>
+  <mat-drawer #drawer mode="over">
+    <mat-selection-list [multiple]="false">
+      <mat-list-option
+        (click)="query = ''; loading = true; releaseYear = 2020; sortBy = 'date_added'; movies = []; getMovies(0); drawer.toggle()">
+        <mat-icon>schedule</mat-icon>
+        Recent Releases
+      </mat-list-option>
+      <mat-list-option
+        (click)="query = ''; loading = true; releaseYear = 1900; sortBy = 'download_count'; movies = []; getMovies(0); drawer.toggle()">
+        <mat-icon>download</mat-icon>
+        Most Downloaded
+      </mat-list-option>
+    </mat-selection-list>
+  </mat-drawer>
+
+  <div>
+
+    <div [hidden]="!loading">
+      <div class="container">
+        <div class="loader-spinner">
+          <svg viewBox="0 0 120 120" version="1.1" xmlns="http://www.w3.org/2000/svg">
+            <circle class="load one" cx="60" cy="60" r="20" pathLength="1" />
+            <circle class="load two" cx="60" cy="60" r="10" />
+            <circle class="load three" cx="60" cy="60" r="30" pathLength="1" />
+          </svg>
         </div>
-        <div class="movie_desc">
-          <p class="text" [innerHTML]="(movie.description_full | slice:0:300 ) + '...'">
-          </p>
-        </div>
-        <div class="year">
-          {{movie.year}}
-        </div>
-        <div class="type">
-          <span *ngFor="let type of movie.genres | slice:0:2; let last = last">{{type}}<span *ngIf="!last">,
-            </span></span>
-        </div>
-        <a class="imdb" [href]="getImdb(movie)">
-          <img src="assets/images/imdb.svg">
-        </a>
-        <a class="magnet" [href]="getMagnet(movie)">
-          <img src="assets/images/magnet.svg">
-        </a>
-        <a *ngIf="movie.yt_trailer_code" target="_blank" class="youtube" [href]="getYoutube(movie)">
-          <img src="assets/images/youtube.svg">
-        </a>
       </div>
     </div>
+    <div class="movies" [hidden]="loading || movies == []">
+      <div *ngFor="let movie of movies" class="movie_card" id="{{movie.id}}" [ngClass]="{'flipped': movie.flip}">
+        <div class="front">
+          <img src="{{movie.large_cover_image}}" (click)="movie.flip=true" />
+        </div>
+        <div class="back">
+          <div class="bg" [ngStyle]="{'background-image': 'url(' + movie.background_image + ')'}"></div>
+          <div class="back-btn" (click)="movie.flip=false">
+            <img src="assets/images/back.svg">
+          </div>
+          <div class="rating">
+            {{movie.rating}}
+            <img src="assets/images/star.svg">
+          </div>
+          <div class="runtime" *ngIf="movie.runtime!=0">
+            {{movie.runtime}} Min
+            <img src="assets/images/time.svg">
+          </div>
+
+          <div class="info_section">
+            <div class="movie_header">
+              <h1>{{movie.title}}</h1>
+            </div>
+            <div class="movie_desc">
+              <p class="text" [innerHTML]="movie.description_full">
+              </p>
+            </div>
+            <div class="back-drop"></div>
+            <div class="type">
+              <span *ngFor="let type of movie.genres | slice:0:2; let last = last">{{type}}<span *ngIf="!last">,
+                </span></span>
+            </div>
+            <div class="year">
+              {{movie.year}}
+            </div>
+            <a class="imdb" [href]="getImdb(movie)">
+              <img src="assets/images/imdb.svg">
+            </a>
+            <a class="magnet" [href]="getMagnet(movie)">
+              <img src="assets/images/magnet.svg">
+            </a>
+            <a *ngIf="movie.yt_trailer_code" target="_blank" class="youtube" [href]="getYoutube(movie)">
+              <img src="assets/images/youtube.svg">
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
-</div>
+
+</mat-drawer-container>

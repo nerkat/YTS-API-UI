@@ -1,8 +1,6 @@
-import { Component } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { DomSanitizer } from '@angular/platform-browser';
-
-
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -15,8 +13,10 @@ export class AppComponent {
 
   title = 'YTSS';
   movies: any = [];
-  filterdMovies: any = [];
   loading: boolean = true;
+  query: string = "";
+  sortBy: string = "date_added";
+  releaseYear: number = 2000;
 
   constructor(private http: HttpClient, private sanitizer: DomSanitizer) {
   }
@@ -28,18 +28,21 @@ export class AppComponent {
   }
 
   getMovies(page: any) {
-    this.http.get("https://yts.mx/api/v2/list_movies.json?quality=1080p&minimum_rating=6&limit=50&sort_by=date_added&page=" + page).subscribe((data: any) => {
-      this.movies = [...this.movies, ...data.data.movies];
-      this.movies = this.removeDuplicates(this.movies, "id");
-      this.movies.sort((a: any, b: any) => (a.year > b.year) ? -1 : 1)
+    this.http.get("https://yts.mx/api/v2/list_movies.json?quality=1080p&minimum_rating=6&limit=50&sort_by=" + this.sortBy + "&page=" + page + "&query_term=" + this.query).subscribe((data: any) => {
+      if (!data.data.movies) { return; }
+      let moviesLoad = [...this.movies, ...data.data.movies];
+      moviesLoad = this.removeDuplicates(moviesLoad, "id");
+      moviesLoad = this.removeOldTitles(moviesLoad, this.releaseYear);
+      moviesLoad = this.sortByReleaseDate(moviesLoad);
+
       console.log(this.movies);
 
-      if (page < 3) {
+      if (page < 3 && data.data.movie_count > moviesLoad) {
         this.getMovies(page + 1);
       }
 
       else {
-        this.filterdMovies = this.movies;
+        this.movies = moviesLoad;
         this.loading = false;
       }
 
@@ -68,16 +71,6 @@ export class AppComponent {
     return "https://www.imdb.com/title/" + movie.imdb_code;
   }
 
-  filterMovies(query: any) {
-    if (!query || query == "") {
-      this.filterdMovies = this.movies;
-    }
-    this.filterdMovies = this.movies.filter(function (movie: any) {
-      return movie.title.toLowerCase().includes(query.toLowerCase());
-    });
-
-  }
-
   removeDuplicates(originalArray: any, prop: any) {
     var newArray = [];
     var lookupObject: any = {};
@@ -91,4 +84,16 @@ export class AppComponent {
     }
     return newArray;
   }
+
+  removeOldTitles(movies: any, releaseYear: number) {
+    return movies.filter(function (movie: any) {
+      return movie.year > releaseYear;
+    });
+  }
+
+  sortByReleaseDate(movies: any) {
+    return movies.sort((a: any, b: any) => (a.date_uploaded_unix > b.date_uploaded_unix) ? -1 : 1);
+  }
+
 }
+
