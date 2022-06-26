@@ -4,10 +4,10 @@ import { HttpClient } from "@angular/common/http";
 @Injectable({
   providedIn: 'root'
 })
+
 export class YtsService {
 
   movies: any = [];
-  loading: boolean = true;
   releaseYear: number = 2000;
 
   constructor(private http: HttpClient) { }
@@ -28,12 +28,10 @@ export class YtsService {
 
       else {
         this.movies = moviesLoad;
-        this.loading = false;
       }
 
     })
   }
-
 
   removeDuplicates(originalArray: any, prop: any) {
     var newArray = [];
@@ -58,4 +56,5 @@ export class YtsService {
   sortByReleaseDate(movies: any) {
     return movies.sort((a: any, b: any) => (a.date_uploaded_unix > b.date_uploaded_unix) ? -1 : 1);
   }
+  
 }
