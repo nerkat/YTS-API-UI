@@ -12,10 +12,18 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SettingsComponent } from './settings/settings.component';
+import { RecentComponent } from './recent/recent.component';
+import { DownloadedComponent } from './downloaded/downloaded.component';
+import { MovieCardComponent } from './movie-card/movie-card.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SettingsComponent,
+    RecentComponent,
+    DownloadedComponent,
+    MovieCardComponent
   ],
   imports: [
     BrowserModule,
