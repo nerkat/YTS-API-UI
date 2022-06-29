@@ -5,7 +5,7 @@
     backface-visibility: hidden;
     position: relative;
 
-    &.flipped {
+    &.flipped, &:hover {
 
         .back {
             backface-visibility: visible;

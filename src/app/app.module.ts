@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+
+
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -10,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSelectModule } from '@angular/material/select';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -19,6 +22,8 @@ import { SettingsComponent } from './settings/settings.component';
 import { RecentComponent } from './recent/recent.component';
 import { DownloadedComponent } from './downloaded/downloaded.component';
 import { MovieCardComponent } from './movie-card/movie-card.component';
+import { LoaderComponent } from './loader/loader.component';
+import { LoaderInterceptor } from './loader/loader.interceptor';
 
 @NgModule({
   declarations: [
@@ -26,7 +31,8 @@ import { MovieCardComponent } from './movie-card/movie-card.component';
     SettingsComponent,
     RecentComponent,
     DownloadedComponent,
-    MovieCardComponent
+    MovieCardComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
@@ -42,9 +48,16 @@ import { MovieCardComponent } from './movie-card/movie-card.component';
     MatInputModule,
     FormsModule,
     MatSlideToggleModule,
-    MatSelectModule
+    MatSelectModule,
+    MatProgressSpinnerModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoaderInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
