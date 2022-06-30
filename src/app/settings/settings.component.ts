@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SettingsService } from './settings.service';
 
 @Component({
   selector: 'app-settings',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingsComponent implements OnInit {
 
-  constructor() { }
+  years: any = [];
+
+  constructor(public settingsService: SettingsService) { }
 
   ngOnInit(): void {
+
+    let stopYear = 1900;
+    var startYear = new Date().getFullYear();
+    while (stopYear <= startYear) {
+      this.years.push(startYear--);
+    }
   }
 
 }

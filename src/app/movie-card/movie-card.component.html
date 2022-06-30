@@ -1,6 +1,7 @@
 <div class="movie_card" id="{{movie.id}}" [ngClass]="{'flipped': movie.flip}">
     <div class="front">
-        <img src="{{movie.large_cover_image}}" (click)="movie.flip=true" />
+        <img src="{{movie.large_cover_image}}" (click)="movie.flip=true" (error)="replaceImage($event)" />
+        <h1 class="noImageTitle" *ngIf="movie.noPoster">{{movie.title}}</h1>
     </div>
     <div class="back">
         <div class="bg" [ngStyle]="{'background-image': 'url(' + movie.background_image + ')'}"></div>

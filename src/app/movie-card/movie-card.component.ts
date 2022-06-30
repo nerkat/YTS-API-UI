@@ -33,4 +33,9 @@ export class MovieCardComponent implements OnInit {
     return "https://www.imdb.com/title/" + movie.imdb_code;
   }
 
+  replaceImage(event: any) {
+    this.movie.noPoster = true;
+    event.srcElement.src = 'assets/images/noImage.jpg';
+  }
+
 }

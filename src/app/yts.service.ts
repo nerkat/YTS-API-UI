@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
+import { SettingsService } from './settings/settings.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,21 +9,22 @@ import { HttpClient } from "@angular/common/http";
 export class YtsService {
 
   movies: any = [];
-  releaseYear: number = 2000;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private settingsService: SettingsService) { }
 
   getMovies(page: number = 0, sortBy: string = "date_added", query: string = "") {
-    this.http.get("https://yts.mx/api/v2/list_movies.json?quality=1080p&minimum_rating=6&limit=50&sort_by=" + sortBy + "&page=" + page + "&query_term=" + query).subscribe((data: any) => {
+    let quality = '';
+    if (this.settingsService.settings.hide720) {
+      quality = '1080p';
+    }
+    this.http.get("https://yts.mx/api/v2/list_movies.json?quality=" + quality + "&minimum_rating=" + this.settingsService.settings.hideRating + "&limit=50&sort_by=" + sortBy + "&page=" + page + "&query_term=" + query).subscribe((data: any) => {
       if (!data.data.movies) { return; }
       let moviesLoad = [...this.movies, ...data.data.movies];
       moviesLoad = this.removeDuplicates(moviesLoad, "id");
-      moviesLoad = this.removeOldTitles(moviesLoad, this.releaseYear);
+      moviesLoad = this.removeOldTitles(moviesLoad, parseInt(this.settingsService.settings.hideYear) - 1);
       moviesLoad = this.sortByReleaseDate(moviesLoad);
 
-      console.log(this.movies);
-
-      if (page < 3 && data.data.movie_count > moviesLoad) {
+      if (page < parseInt(this.settingsService.settings.pagesToLoad) - 1 && data.data.movie_count > moviesLoad.length) {
         this.getMovies(page + 1);
       }
 
@@ -56,5 +58,5 @@ export class YtsService {
   sortByReleaseDate(movies: any) {
     return movies.sort((a: any, b: any) => (a.date_uploaded_unix > b.date_uploaded_unix) ? -1 : 1);
   }
-  
+
 }
