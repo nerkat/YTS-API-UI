@@ -138,6 +138,17 @@
     }
 }
 
+.fav {
+    position: absolute;
+    bottom: 46px;
+    left: 15px;
+    cursor: pointer;
+
+    img {
+        width: 26px;
+    }
+}
+
 .youtube {
     position: absolute;
     bottom: 11px;
@@ -180,11 +191,11 @@
 }
 
 .noImageTitle {
-    text-shadow: 1px 1px 14px #ffffff;
+    text-shadow: 3px 2px 2px #b7b7b7;
     position: absolute;
     color: black;
     font-size: 24px;
     text-align: center;
-    padding: 12px;
+    padding: 14px;
     margin-top: -15px;
 }

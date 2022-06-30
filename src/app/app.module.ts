@@ -24,6 +24,7 @@ import { DownloadedComponent } from './downloaded/downloaded.component';
 import { MovieCardComponent } from './movie-card/movie-card.component';
 import { LoaderComponent } from './loader/loader.component';
 import { LoaderInterceptor } from './loader/loader.interceptor';
+import { FavoritesComponent } from './favorites/favorites.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { LoaderInterceptor } from './loader/loader.interceptor';
     RecentComponent,
     DownloadedComponent,
     MovieCardComponent,
-    LoaderComponent
+    LoaderComponent,
+    FavoritesComponent
   ],
   imports: [
     BrowserModule,

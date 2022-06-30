@@ -19,13 +19,17 @@
 <mat-drawer-container autosize>
   <mat-drawer #drawer mode="over">
     <mat-selection-list [multiple]="false">
-      <mat-list-option routerLink="/recent-releases" (click)="drawer.toggle()">
+      <mat-list-option routerLink="recent-releases" (click)="drawer.toggle()">
         <mat-icon>schedule</mat-icon>
         Recent Releases
       </mat-list-option>
-      <mat-list-option routerLink="/most-downloaded" (click)="drawer.toggle()">
+      <mat-list-option routerLink="most-downloaded" (click)="drawer.toggle()">
         <mat-icon>download</mat-icon>
         Most Downloaded
+      </mat-list-option>
+      <mat-list-option routerLink="favorites" (click)="drawer.toggle()">
+        <mat-icon>favorite</mat-icon>
+        Favorites
       </mat-list-option>
       <mat-list-option routerLink="settings" (click)="drawer.toggle()">
         <mat-icon>settings</mat-icon>

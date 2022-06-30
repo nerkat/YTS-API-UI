@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { SettingsService } from '../settings/settings.service';
 
 @Component({
   selector: 'app-movie-card',
@@ -10,9 +11,18 @@ export class MovieCardComponent implements OnInit {
 
   @Input() movie: any;
 
-  constructor(private sanitizer: DomSanitizer) { }
+  constructor(private sanitizer: DomSanitizer, private settingsService: SettingsService) {
+
+  }
 
   ngOnInit(): void {
+
+    for (var i = 0; i < this.settingsService.settings.favMovies.length; i++) {
+      if (this.settingsService.settings.favMovies[i].id == this.movie.id) {
+        this.movie.fav = true;
+        break;
+      }
+    }
   }
 
   getMagnet(movie: any) {
@@ -36,6 +46,18 @@ export class MovieCardComponent implements OnInit {
   replaceImage(event: any) {
     this.movie.noPoster = true;
     event.srcElement.src = 'assets/images/noImage.jpg';
+  }
+
+  favMovie(id: any) {
+    if (this.movie.fav) {
+      this.settingsService.settings.favMovies.push(this.movie);
+    }
+    else {
+      this.settingsService.settings.favMovies = this.settingsService.settings.favMovies.filter(function (movie: any) {
+        return movie.id !== id;
+      });
+    }
+    this.settingsService.save();
   }
 
 }

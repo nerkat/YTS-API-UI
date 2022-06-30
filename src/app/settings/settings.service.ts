@@ -10,7 +10,8 @@ export class SettingsService {
     darkTheme: false,
     hideRating: 5,
     hideYear: 2000,
-    pagesToLoad: 6
+    pagesToLoad: 6,
+    favMovies: []
   };
 
   constructor() {

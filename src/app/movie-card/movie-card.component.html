@@ -39,6 +39,10 @@
             <a class="magnet" [href]="getMagnet(movie)">
                 <img src="assets/images/magnet.svg">
             </a>
+            <a class="fav" (click)="movie.fav=!movie.fav; favMovie(movie.id)">
+                <img [hidden]="!movie.fav" src="assets/images/fav-full.svg">
+                <img [hidden]="movie.fav" src="assets/images/fav-empty.svg">
+            </a>
             <a *ngIf="movie.yt_trailer_code" target="_blank" class="youtube" [href]="getYoutube(movie)">
                 <img src="assets/images/youtube.svg">
             </a>
