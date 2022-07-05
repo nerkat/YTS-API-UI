@@ -25,7 +25,7 @@ export class YtsService {
       moviesLoad = this.sortByReleaseDate(moviesLoad);
 
       if (page < parseInt(this.settingsService.settings.pagesToLoad) - 1 && data.data.movie_count > moviesLoad.length) {
-        this.getMovies(page + 1);
+        this.getMovies(page + 1, sortBy);
       }
 
       else {

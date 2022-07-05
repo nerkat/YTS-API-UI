@@ -1,38 +1,38 @@
 <div>
-    <mat-slide-toggle (change)="settingsService.save()" [(ngModel)]="settingsService.settings.hide720">Show only 1080p</mat-slide-toggle>
-    <mat-slide-toggle (change)="settingsService.save()" [(ngModel)]="settingsService.settings.darkTheme">Dark Theme</mat-slide-toggle>
 
-    <mat-form-field>
-        <mat-label>Number of pages to load</mat-label>
-        <select (change)="settingsService.save()" matNativeControl [(ngModel)]="settingsService.settings.pagesToLoad">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="9">10</option>
-        </select>
-    </mat-form-field>
 
-    <mat-form-field>
-        <mat-label>Hide movies with a rating score lower than</mat-label>
-        <select (change)="settingsService.save()" matNativeControl [(ngModel)]="settingsService.settings.hideRating">
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-        </select>
-    </mat-form-field>
+    <label>Show only 1080p</label>
+    <input type="checkbox" [(ngModel)]="settingsService.settings.hide720">
+    <label>Dark Theme</label>
+    <input type="checkbox" [(ngModel)]="settingsService.settings.darkTheme">
 
-    <mat-form-field>
-        <mat-label>Don't show movies older then</mat-label>
-        <select (change)="settingsService.save()" matNativeControl [(ngModel)]="settingsService.settings.hideYear">
-            <option *ngFor="let year of years" (value)="year">{{year}}</option>
-        </select>
-    </mat-form-field>
+
+
+    <label>Number of pages to load</label>
+    <select (change)="settingsService.save()" matNativeControl [(ngModel)]="settingsService.settings.pagesToLoad">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="9">10</option>
+    </select>
+
+    <label>Hide movies with a rating score lower than</label>
+    <select (change)="settingsService.save()" matNativeControl [(ngModel)]="settingsService.settings.hideRating">
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+    </select>
+
+    <label>Don't show movies older then</label>
+    <select (change)="settingsService.save()" matNativeControl [(ngModel)]="settingsService.settings.hideYear">
+        <option *ngFor="let year of years" (value)="year">{{year}}</option>
+    </select>
 </div>
