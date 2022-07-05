@@ -1,0 +1,59 @@
+:host {
+    background: #1e1e1e;
+    display: flex;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    box-shadow: 2px 3px 11px 2px #000000a8;
+    align-items: center;
+
+    h1 {
+        margin: 0;
+        font-size: 20px;
+        color: #D8D8D8;
+        text-transform: capitalize;
+        padding-left: 15px;
+    }
+}
+
+ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 10px;
+    justify-content: end;
+
+    li {
+        margin: 0 4px;
+
+        a {
+            img {
+                height: 20px;
+            }
+        }
+    }
+}
+
+.tooltip {
+    position: relative;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 7px 7px;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+    top: 22px;
+    min-width: 80px;
+    font-size: 10px;
+    right: -10px;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}

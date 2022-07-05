@@ -1,0 +1,40 @@
+<!-- <mat-form-field floatLabel="never">
+    <mat-label>Search Movie...</mat-label>
+    <input matInput type="text" [(ngModel)]="query"
+      (keyup)="loading = true; releaseYear = 1900; movies = []; getMovies(0)">
+  </mat-form-field> -->
+
+<h1>{{pageTitle}}</h1>
+
+<ul>
+    <li>
+        <a routerLink="recent-releases" class="tooltip">
+            <span class="tooltiptext">Recent Releases</span>
+            <img src="assets/images/recent.svg">
+        </a>
+    </li>
+    <li>
+        <a routerLink="most-downloaded" class="tooltip">
+            <span class="tooltiptext">Most Downloaded</span>
+            <img src="assets/images/download.svg">
+        </a>
+    </li>
+    <li>
+        <a routerLink="favorites" class="tooltip">
+            <span class="tooltiptext">Favorites</span>
+            <img src="assets/images/fav-full.svg">
+        </a>
+    </li>
+    <li>
+        <a routerLink="settings" class="tooltip">
+            <span class="tooltiptext">Settings</span>
+            <img src="assets/images/cog.svg">
+        </a>
+    </li>
+    <li>
+        <a class="tooltip">
+            <span class="tooltiptext">Search</span>
+            <img src="assets/images/search.svg">
+        </a>
+    </li>
+</ul>

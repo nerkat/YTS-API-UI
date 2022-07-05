@@ -1,16 +1,3 @@
-
-<!-- <mat-form-field floatLabel="never">
-    <mat-label>Search Movie...</mat-label>
-    <input matInput type="text" [(ngModel)]="query"
-      (keyup)="loading = true; releaseYear = 1900; movies = []; getMovies(0)">
-  </mat-form-field> -->
-
-<ul>
-  <li><a routerLink="recent-releases">Recent Releases</a></li>
-  <li><a routerLink="most-downloaded">Most Downloaded</a></li>
-  <li><a routerLink="favorites">Favorites</a></li>
-  <li><a routerLink="settings">Settings</a></li>
-</ul>
-
+<app-header></app-header>
 
 <router-outlet></router-outlet>

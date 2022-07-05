@@ -30,6 +30,7 @@
         <option value="8">8</option>
         <option value="9">9</option>
     </select>
+    <progress id="file" value="32" max="100"> 32% </progress>
 
     <label>Don't show movies older then</label>
     <select (change)="settingsService.save()" [(ngModel)]="settingsService.settings.hideYear">
