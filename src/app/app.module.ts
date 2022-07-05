@@ -11,6 +11,8 @@ import { DownloadedComponent } from './downloaded/downloaded.component';
 import { MovieCardComponent } from './movie-card/movie-card.component';
 import { FavoritesComponent } from './favorites/favorites.component';
 import { HeaderComponent } from './header/header.component';
+import { LoaderComponent } from './loader/loader.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { HeaderComponent } from './header/header.component';
     DownloadedComponent,
     MovieCardComponent,
     FavoritesComponent,
-    HeaderComponent
+    HeaderComponent,
+    LoaderComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

@@ -1,26 +1,7 @@
 <div>
 
-
     <label>Show only 1080p</label>
     <input type="checkbox" [(ngModel)]="settingsService.settings.hide720">
-    <label>Dark Theme</label>
-    <input type="checkbox" [(ngModel)]="settingsService.settings.darkTheme">
-
-
-
-    <label>Number of pages to load</label>
-    <select (change)="settingsService.save()" [(ngModel)]="settingsService.settings.pagesToLoad">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="9">10</option>
-    </select>
 
     <label>Hide movies with a rating score lower than</label>
     <select (change)="settingsService.save()" [(ngModel)]="settingsService.settings.hideRating">
@@ -30,7 +11,6 @@
         <option value="8">8</option>
         <option value="9">9</option>
     </select>
-    <progress id="file" value="32" max="100"> 32% </progress>
 
     <label>Don't show movies older then</label>
     <select (change)="settingsService.save()" [(ngModel)]="settingsService.settings.hideYear">

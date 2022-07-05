@@ -7,10 +7,8 @@ export class SettingsService {
 
   settings: any = {
     hide720: true,
-    darkTheme: false,
     hideRating: 5,
     hideYear: 2000,
-    pagesToLoad: 6,
     favMovies: []
   };
 

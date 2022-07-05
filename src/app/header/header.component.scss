@@ -57,3 +57,24 @@ ul {
 .tooltip:hover .tooltiptext {
     visibility: visible;
 }
+
+input {
+    background: black;
+    border: 1px solid #D8D8D8;
+    color: #D8D8D8;
+    border-radius: 5px;
+    padding: 2px 5px;
+    margin-right: 11px;
+    position: relative;
+    top: -5px;
+    transition: 200ms all ease-in;
+    max-width: 150px;
+    opacity: 1;
+
+    &.hide {
+        max-width: 0;
+        opacity: 0;
+        margin: 0;
+        padding: 2px 0;
+    }
+}

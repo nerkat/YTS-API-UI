@@ -1,0 +1,4 @@
+<div class="movies">
+    <app-movie-card *ngFor="let movie of ytsService.movies" [movie]="movie" id="{{movie.id}}"
+      [ngClass]="{'flipped': movie.flip}"></app-movie-card>
+  </div>    

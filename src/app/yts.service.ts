@@ -8,29 +8,41 @@ import { SettingsService } from './settings/settings.service';
 
 export class YtsService {
 
+  page: number = 0;
   movies: any = [];
+  sortBy: string = "date_added";
+  query: string = "";
+  movieCount: number;
+  loading: boolean = false;
 
-  constructor(private http: HttpClient, private settingsService: SettingsService) { }
+  constructor(private http: HttpClient, private settingsService: SettingsService) {
+   
+  }
 
-  getMovies(page: number = 0, sortBy: string = "date_added", query: string = "") {
+
+  getMovies() {
     let quality = '';
     if (this.settingsService.settings.hide720) {
       quality = '1080p';
     }
-    this.http.get("https://yts.mx/api/v2/list_movies.json?quality=" + quality + "&minimum_rating=" + this.settingsService.settings.hideRating + "&limit=50&sort_by=" + sortBy + "&page=" + page + "&query_term=" + query).subscribe((data: any) => {
-      if (!data.data.movies) { return; }
+    if (this.movieCount == this.movies.length) {
+      this.loading = false;
+      return;
+    }
+    this.loading = true;
+    this.http.get("https://yts.mx/api/v2/list_movies.json?quality=" + quality + "&minimum_rating=" + this.settingsService.settings.hideRating + "&limit=50&sort_by=" + this.sortBy + "&page=" + this.page + "&query_term=" + this.query).subscribe((data: any) => {
+      this.movieCount = data.data.movie_count;
+      if (!data.data.movies) {
+        this.loading = false;
+        return;
+      }
       let moviesLoad = [...this.movies, ...data.data.movies];
       moviesLoad = this.removeDuplicates(moviesLoad, "id");
       moviesLoad = this.removeOldTitles(moviesLoad, parseInt(this.settingsService.settings.hideYear) - 1);
       moviesLoad = this.sortByReleaseDate(moviesLoad);
 
-      if (page < parseInt(this.settingsService.settings.pagesToLoad) - 1 && data.data.movie_count > moviesLoad.length) {
-        this.getMovies(page + 1, sortBy);
-      }
-
-      else {
-        this.movies = moviesLoad;
-      }
+      this.movies = moviesLoad;
+      this.loading = false;
 
     })
   }

@@ -16,8 +16,7 @@ export class AppComponent {
   }
 
   ngOnInit() {
-
-
+   
   }
 
 

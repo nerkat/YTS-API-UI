@@ -8,33 +8,35 @@
 
 <ul>
     <li>
-        <a routerLink="recent-releases" class="tooltip">
+        <a routerLink="recent-releases" class="tooltip" (click)="ytsService.query='';showSearch=false">
             <span class="tooltiptext">Recent Releases</span>
             <img src="assets/images/recent.svg">
         </a>
     </li>
     <li>
-        <a routerLink="most-downloaded" class="tooltip">
+        <a routerLink="most-downloaded" class="tooltip" (click)="ytsService.query='';showSearch=false">
             <span class="tooltiptext">Most Downloaded</span>
             <img src="assets/images/download.svg">
         </a>
     </li>
     <li>
-        <a routerLink="favorites" class="tooltip">
+        <a routerLink="favorites" class="tooltip" (click)="ytsService.query='';showSearch=false">
             <span class="tooltiptext">Favorites</span>
             <img src="assets/images/fav-full.svg">
         </a>
     </li>
     <li>
-        <a routerLink="settings" class="tooltip">
+        <a routerLink="settings" class="tooltip" (click)="ytsService.query='';showSearch=false">
             <span class="tooltiptext">Settings</span>
             <img src="assets/images/cog.svg">
         </a>
     </li>
     <li>
-        <a class="tooltip">
+        <a routerLink="search" class="tooltip">
             <span class="tooltiptext">Search</span>
-            <img src="assets/images/search.svg">
+            <input #searchElement type="text" [ngClass]="{'hide': !showSearch}" [(ngModel)]="ytsService.query"
+                (keyup)="ytsService.movies=[];ytsService.page=0;ytsService.movieCount=-1;ytsService.getMovies()">
+            <img src="assets/images/search.svg" (click)="showSearch=!showSearch;searchElement.focus()">
         </a>
     </li>
 </ul>

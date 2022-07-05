@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationStart, Router, Event as NavigationEvent } from '@angular/router';
+import { YtsService } from '../yts.service';
 
 @Component({
   selector: 'app-header',
@@ -8,9 +9,10 @@ import { NavigationStart, Router, Event as NavigationEvent } from '@angular/rout
 })
 export class HeaderComponent implements OnInit {
 
-  pageTitle: string = "";
+  pageTitle: string = "Recent Releases";
+  showSearch: boolean = false;
 
-  constructor(public router: Router) {
+  constructor(public router: Router, public ytsService: YtsService) {
     this.router.events
       .subscribe(
         (event: NavigationEvent) => {
