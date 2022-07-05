@@ -9,7 +9,7 @@
 
 
     <label>Number of pages to load</label>
-    <select (change)="settingsService.save()" matNativeControl [(ngModel)]="settingsService.settings.pagesToLoad">
+    <select (change)="settingsService.save()" [(ngModel)]="settingsService.settings.pagesToLoad">
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
@@ -23,7 +23,7 @@
     </select>
 
     <label>Hide movies with a rating score lower than</label>
-    <select (change)="settingsService.save()" matNativeControl [(ngModel)]="settingsService.settings.hideRating">
+    <select (change)="settingsService.save()" [(ngModel)]="settingsService.settings.hideRating">
         <option value="5">5</option>
         <option value="6">6</option>
         <option value="7">7</option>
@@ -32,7 +32,7 @@
     </select>
 
     <label>Don't show movies older then</label>
-    <select (change)="settingsService.save()" matNativeControl [(ngModel)]="settingsService.settings.hideYear">
+    <select (change)="settingsService.save()" [(ngModel)]="settingsService.settings.hideYear">
         <option *ngFor="let year of years" (value)="year">{{year}}</option>
     </select>
 </div>
