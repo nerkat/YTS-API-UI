@@ -1,19 +1,27 @@
 <div>
-
-    <label>Show only 1080p</label>
-    <input type="checkbox" [(ngModel)]="settingsService.settings.hide720">
-
-    <label>Hide movies with a rating score lower than</label>
-    <select (change)="settingsService.save()" [(ngModel)]="settingsService.settings.hideRating">
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-    </select>
-
-    <label>Don't show movies older then</label>
-    <select (change)="settingsService.save()" [(ngModel)]="settingsService.settings.hideYear">
-        <option *ngFor="let year of years" (value)="year">{{year}}</option>
-    </select>
+    <div>
+        <label class="label">
+            Show only 1080p
+        </label>
+        <label class="switch">
+            <input type="checkbox" (change)="settingsService.save()" [(ngModel)]="settingsService.settings.hide720">
+            <span class="slider"></span>
+        </label>
+    </div>
+    <div>
+        <label class="label">Hide rating score lower than</label>
+        <select (change)="settingsService.save()" [(ngModel)]="settingsService.settings.hideRating">
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+        </select>
+    </div>
+    <div>
+        <label class="label">Don't show movies older then</label>
+        <select (change)="settingsService.save()" [(ngModel)]="settingsService.settings.hideYear">
+            <option *ngFor="let year of years" (value)="year">{{year}}</option>
+        </select>
+    </div>
 </div>

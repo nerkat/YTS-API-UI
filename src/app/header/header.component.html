@@ -35,7 +35,7 @@
         <a routerLink="search" class="tooltip">
             <span class="tooltiptext">Search</span>
             <input #searchElement type="text" [ngClass]="{'hide': !showSearch}" [(ngModel)]="ytsService.query"
-                (keyup)="ytsService.movies=[];ytsService.page=0;ytsService.movieCount=-1;ytsService.getMovies()">
+                (keyup)="subject.next(null)">
             <img src="assets/images/search.svg" (click)="showSearch=!showSearch;searchElement.focus()">
         </a>
     </li>

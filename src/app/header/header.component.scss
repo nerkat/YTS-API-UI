@@ -10,10 +10,11 @@
 
     h1 {
         margin: 0;
-        font-size: 20px;
+        font-size: 26px;
         color: #D8D8D8;
         text-transform: capitalize;
         padding-left: 15px;
+        font-weight: normal;
     }
 }
 
@@ -28,6 +29,9 @@ ul {
         margin: 0 4px;
 
         a {
+            display: flex;
+            align-items: center;
+
             img {
                 height: 20px;
             }
@@ -49,7 +53,7 @@ ul {
     position: absolute;
     z-index: 1;
     top: 22px;
-    min-width: 80px;
+    min-width: 90px;
     font-size: 10px;
     right: -10px;
 }
@@ -65,8 +69,6 @@ input {
     border-radius: 5px;
     padding: 2px 5px;
     margin-right: 11px;
-    position: relative;
-    top: -5px;
     transition: 200ms all ease-in;
     max-width: 150px;
     opacity: 1;

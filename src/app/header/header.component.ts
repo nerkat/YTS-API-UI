@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationStart, Router, Event as NavigationEvent } from '@angular/router';
+import { Subject, debounceTime } from 'rxjs';
 import { YtsService } from '../yts.service';
 
 @Component({
@@ -8,6 +9,8 @@ import { YtsService } from '../yts.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+
+  subject: Subject<any> = new Subject();
 
   pageTitle: string = "Recent Releases";
   showSearch: boolean = false;
@@ -23,7 +26,14 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.subject
+      .pipe(debounceTime(300))
+      .subscribe(() => {
+        this.ytsService.movies = [];
+        this.ytsService.page = 0;
+        this.ytsService.movieCount = -1;
+        this.ytsService.getMovies();
+      });
   }
 }
 
