@@ -1,0 +1,51 @@
+<div class="movie_card" id="{{movie.id}}" [ngClass]="{'flipped': movie.flip}">
+    <div class="front">
+        <img src="{{movie.large_cover_image}}" (click)="movie.flip=true" (error)="replaceImage($event)" />
+        <h1 class="noImageTitle" *ngIf="movie.noPoster">{{movie.title}}</h1>
+    </div>
+    <div class="back">
+        <div class="bg" [ngStyle]="{'background-image': 'url(' + movie.background_image + ')'}"></div>
+        <div class="back-btn" (click)="movie.flip=false">
+            <img src="assets/images/back.svg">
+        </div>
+        <div class="rating">
+            {{movie.rating}}
+            <img src="assets/images/star.svg">
+        </div>
+        <div class="runtime" *ngIf="movie.runtime!=0">
+            {{movie.runtime}} Min
+            <img src="assets/images/time.svg">
+        </div>
+
+        <div class="info_section">
+            <div class="movie_header">
+                <h1>{{movie.title}}</h1>
+            </div>
+            <div class="movie_desc">
+                <p class="text" [innerHTML]="movie.description_full">
+                </p>
+            </div>
+            <div class="back-drop"></div>
+            <div class="type">
+                <span *ngFor="let type of movie.genres | slice:0:2; let last = last">{{type}}<span *ngIf="!last">,
+                    </span></span>
+            </div>
+            <div class="year">
+                {{movie.year}}
+            </div>
+            <a class="imdb" target="_blank" [href]="movie.imdbLink">
+                <img src="assets/images/imdb.svg">
+            </a>
+            <a class="magnet" [href]="movie.magnet">
+                <img src="assets/images/magnet.svg">
+            </a>
+            <a class="fav" (click)="movie.fav=!movie.fav; favMovie(movie.id)">
+                <img [hidden]="!movie.fav" src="assets/images/fav-full.svg">
+                <img [hidden]="movie.fav" src="assets/images/fav-empty.svg">
+            </a>
+            <a *ngIf="movie.yt_trailer_code" target="_blank" class="youtube" [href]="movie.ytLink">
+                <img src="assets/images/youtube.svg">
+            </a>
+        </div>
+    </div>
+</div>
