@@ -1,17 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DownloadedComponent } from './downloaded/downloaded.component';
-import { RecentComponent } from './recent/recent.component';
-import { FavoritesComponent } from './favorites/favorites.component';
 import { SettingsComponent } from './settings/settings.component';
-import { SearchComponent } from './search/search.component';
+import { MovieListComponent } from './movie-list/movie-list.component';
 
 const routes: Routes = [
-  { path: 'recent-releases', component: RecentComponent },
-  { path: 'most-downloaded', component: DownloadedComponent },
-  { path: 'favorites', component: FavoritesComponent },
+  { path: 'recent-releases', component: MovieListComponent },
+  { path: 'most-downloaded', component: MovieListComponent },
+  { path: 'favorites', component: MovieListComponent },
   { path: 'settings', component: SettingsComponent },
-  { path: 'search', component: SearchComponent },
   { path: '**', redirectTo: '/recent-releases', pathMatch: 'full' },
   { path: '', redirectTo: '/recent-releases', pathMatch: 'full' }
 
@@ -21,4 +17,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
+
 export class AppRoutingModule { }

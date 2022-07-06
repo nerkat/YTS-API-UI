@@ -10,7 +10,7 @@
 
     h1 {
         margin: 0;
-        font-size: 26px;
+        font-size: 18px;
         color: #D8D8D8;
         text-transform: capitalize;
         padding-left: 15px;
@@ -64,7 +64,7 @@ ul {
 
 input {
     background: black;
-    border: 1px solid #D8D8D8;
+    border: 1px solid #d8d8d845;
     color: #D8D8D8;
     border-radius: 5px;
     padding: 2px 5px;
@@ -72,6 +72,8 @@ input {
     transition: 200ms all ease-in;
     max-width: 150px;
     opacity: 1;
+    position: absolute;
+    right: 30px;
 
     &.hide {
         max-width: 0;

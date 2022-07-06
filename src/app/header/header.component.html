@@ -1,42 +1,31 @@
-<!-- <mat-form-field floatLabel="never">
-    <mat-label>Search Movie...</mat-label>
-    <input matInput type="text" [(ngModel)]="query"
-      (keyup)="loading = true; releaseYear = 1900; movies = []; getMovies(0)">
-  </mat-form-field> -->
-
 <h1>{{pageTitle}}</h1>
 
 <ul>
     <li>
-        <a routerLink="recent-releases" class="tooltip" (click)="ytsService.query='';showSearch=false">
-            <span class="tooltiptext">Recent Releases</span>
+        <a routerLink="recent-releases" (click)="ytsService.query='';showSearch=false">
             <img src="assets/images/recent.svg">
         </a>
     </li>
     <li>
-        <a routerLink="most-downloaded" class="tooltip" (click)="ytsService.query='';showSearch=false">
-            <span class="tooltiptext">Most Downloaded</span>
+        <a routerLink="most-downloaded" (click)="ytsService.query='';showSearch=false">
             <img src="assets/images/download.svg">
         </a>
     </li>
     <li>
-        <a routerLink="favorites" class="tooltip" (click)="ytsService.query='';showSearch=false">
-            <span class="tooltiptext">Favorites</span>
+        <a routerLink="favorites" (click)="ytsService.query='';showSearch=false">
             <img src="assets/images/fav-full.svg">
         </a>
     </li>
     <li>
-        <a routerLink="settings" class="tooltip" (click)="ytsService.query='';showSearch=false">
-            <span class="tooltiptext">Settings</span>
+        <a routerLink="settings" (click)="ytsService.query='';showSearch=false">
             <img src="assets/images/cog.svg">
         </a>
     </li>
-    <li>
-        <a routerLink="search" class="tooltip">
-            <span class="tooltiptext">Search</span>
-            <input #searchElement type="text" [ngClass]="{'hide': !showSearch}" [(ngModel)]="ytsService.query"
-                (keyup)="subject.next(null)">
-            <img src="assets/images/search.svg" (click)="showSearch=!showSearch;searchElement.focus()">
+    <li (mousemove)="showSearch=true;searchElement.focus()">
+        <a>
+            <input #searchElement type="text" (blur)="showSearch=false" (focus)="showSearch=true"
+                [ngClass]="{'hide': !showSearch}" [(ngModel)]="ytsService.query" (keyup)="ytsService.$search.next(null)">
+            <img src="assets/images/search.svg">
         </a>
     </li>
 </ul>

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { SettingsService } from './settings/settings.service';
+import { NavigationStart, Router, Event as NavigationEvent } from '@angular/router';
+import { Subject, debounceTime } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,15 +10,70 @@ import { SettingsService } from './settings/settings.service';
 
 export class YtsService {
 
+  $getMovies: Subject<any> = new Subject();
+  $search: Subject<any> = new Subject();
+
   page: number = 0;
   movies: any = [];
   sortBy: string = "date_added";
   query: string = "";
   movieCount: number;
   loading: boolean = false;
+  currentUrl: string = "";
 
-  constructor(private http: HttpClient, private settingsService: SettingsService) {
-   
+  constructor(public router: Router, private http: HttpClient, private settingsService: SettingsService) {
+    this.router.events
+      .subscribe(
+        (event: NavigationEvent) => {
+          if (event instanceof NavigationStart) {
+            console.log(event);
+            this.currentUrl = event.url;
+            if (event.url == '/recent-releases') {
+              this.movies = [];
+              this.page = 0;
+              this.sortBy = "date_added";
+              this.movieCount = -1;
+              this.getMovies();
+            }
+            if (event.url == '/most-downloaded') {
+              this.movies = [];
+              this.page = 0;
+              this.sortBy = "download_count";
+              this.movieCount = -1;
+              this.getMovies();
+            }
+            if (event.url == '/favorites') {
+              this.movies = this.settingsService.settings.favMovies;
+            }
+          }
+        });
+
+
+    const body: any = document.querySelector('body');
+
+    body.addEventListener('scroll', () => {
+      if (body.offsetHeight + body.scrollTop >= (body.scrollHeight - 10)) {
+        this.$getMovies.next(null);
+      }
+    })
+
+    this.$getMovies
+      .pipe(debounceTime(300))
+      .subscribe(() => {
+        if (this.currentUrl == '/recent-releases' || this.currentUrl == '/most-downloaded') {
+          this.page++;
+          this.getMovies();
+        }
+      });
+
+    this.$search
+      .pipe(debounceTime(300))
+      .subscribe(() => {
+        this.movies = [];
+        this.page = 0;
+        this.movieCount = -1;
+        this.getMovies();
+      });
   }
 
 
