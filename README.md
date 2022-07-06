@@ -1,6 +1,7 @@
 # YTSS
 
-A simple UI for YTS API - recent releases, most downloaded, and search.__
+A simple UI for YTS API - recent releases, most downloaded, and search.
+
 Demo can be found here: https://torrentscrap-e1ac6.web.app
 
 
