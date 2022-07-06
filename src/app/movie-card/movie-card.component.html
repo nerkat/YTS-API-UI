@@ -33,17 +33,17 @@
             <div class="year">
                 {{movie.year}}
             </div>
-            <a class="imdb" [href]="getImdb(movie)">
+            <a class="imdb" target="_blank" [href]="movie.imdbLink">
                 <img src="assets/images/imdb.svg">
             </a>
-            <a class="magnet" [href]="getMagnet(movie)">
+            <a class="magnet" [href]="movie.magnet">
                 <img src="assets/images/magnet.svg">
             </a>
             <a class="fav" (click)="movie.fav=!movie.fav; favMovie(movie.id)">
                 <img [hidden]="!movie.fav" src="assets/images/fav-full.svg">
                 <img [hidden]="movie.fav" src="assets/images/fav-empty.svg">
             </a>
-            <a *ngIf="movie.yt_trailer_code" target="_blank" class="youtube" [href]="getYoutube(movie)">
+            <a *ngIf="movie.yt_trailer_code" target="_blank" class="youtube" [href]="movie.ytLink">
                 <img src="assets/images/youtube.svg">
             </a>
         </div>

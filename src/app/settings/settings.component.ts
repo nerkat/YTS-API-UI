@@ -14,6 +14,7 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit(): void {
 
+    // populate years
     let stopYear = 1900;
     var startYear = new Date().getFullYear();
     while (stopYear <= startYear) {

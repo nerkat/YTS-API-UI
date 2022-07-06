@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SettingsService } from './settings/settings.service';
 
 @Component({
   selector: 'app-root',
@@ -12,11 +13,11 @@ export class AppComponent {
   title = 'YTSS';
 
 
-  constructor() {
+  constructor(public settingsService: SettingsService) {
   }
 
   ngOnInit() {
-   
+
   }
 
 

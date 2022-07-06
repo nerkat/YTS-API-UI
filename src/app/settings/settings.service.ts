@@ -13,11 +13,13 @@ export class SettingsService {
   };
 
   constructor() {
+    // get settings from local storage
     if (localStorage.getItem('ytssSettings')) {
       this.settings = JSON.parse(localStorage.getItem('ytssSettings') || '{}');
     }
   }
 
+  // save settings to local storage
   save() {
     localStorage.setItem('ytssSettings', JSON.stringify(this.settings));
   }
