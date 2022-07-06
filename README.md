@@ -1,7 +1,7 @@
 # YTSS
 
 A simple UI for YTS API - recent releases, most downloaded, and search.
-![YTSS API SCRAPER](/assets/images/YTSS.png)
+![YTSS API SCRAPER](./assets/images/YTSS.png)
 
 
 # Angular
