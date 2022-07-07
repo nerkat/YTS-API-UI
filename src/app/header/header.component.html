@@ -21,12 +21,11 @@
             <img src="assets/images/cog.svg">
         </a>
     </li>
-    <li (mousemove)="showSearch=true;searchElement.focus()">
+    <li>
         <a>
-            <input class="search" #searchElement type="text" (blur)="showSearch=false" (focus)="showSearch=true"
-                [ngClass]="{'hide': !showSearch}" [(ngModel)]="ytsService.query"
-                (keyup)="ytsService.$search.next(null)">
-            <img src="assets/images/search.svg">
+            <input class="search" #searchElement type="text" (blur)="showSearch=false" [ngClass]="{'hide': !showSearch}"
+                [(ngModel)]="ytsService.query" (keyup)="ytsService.$search.next(null)" (mousemove)="showSearch=true;searchElement.focus()" (mouseout)="showSearch=false">
+            <img class="search-icon" src="assets/images/search.svg" (mousemove)="showSearch=true;searchElement.focus()">
         </a>
     </li>
 </ul>

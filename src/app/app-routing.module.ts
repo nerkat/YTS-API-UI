@@ -6,6 +6,7 @@ import { MovieListComponent } from './movie-list/movie-list.component';
 const routes: Routes = [
   { path: 'recent-releases', component: MovieListComponent },
   { path: 'most-downloaded', component: MovieListComponent },
+  { path: 'search', component: MovieListComponent },
   { path: 'favorites', component: MovieListComponent },
   { path: 'settings', component: SettingsComponent },
   { path: '**', redirectTo: '/recent-releases', pathMatch: 'full' },

@@ -7,14 +7,18 @@
     z-index: 1;
     box-shadow: 2px 3px 11px 2px #000000a8;
     align-items: center;
+    padding: 15px;
 
     h1 {
         margin: 0;
-        font-size: 18px;
+        font-size: 24px;
         color: #D8D8D8;
         text-transform: capitalize;
-        padding-left: 15px;
         font-weight: normal;
+
+        @media only screen and (max-width: 600px) {
+            font-size: 16px;
+        }
     }
 }
 
@@ -22,64 +26,51 @@ ul {
     display: flex;
     list-style: none;
     margin: 0;
-    padding: 10px;
     justify-content: end;
 
     li {
-        margin: 0 4px;
+        margin: 0 10px;
+
+        @media only screen and (max-width: 600px) {
+            margin: 0 5px;
+        }
 
         a {
             display: flex;
             align-items: center;
 
             img {
-                height: 20px;
+                height: 24px;
+
+                @media only screen and (max-width: 600px) {
+                    height: 20px;
+                }
             }
         }
     }
 }
 
-.tooltip {
+.search-icon {
     position: relative;
-}
-
-.tooltip .tooltiptext {
-    visibility: hidden;
-    background-color: black;
-    color: #fff;
-    text-align: center;
-    padding: 7px 7px;
-    border-radius: 6px;
-    position: absolute;
     z-index: 1;
-    top: 22px;
-    min-width: 90px;
-    font-size: 10px;
-    right: -10px;
-}
-
-.tooltip:hover .tooltiptext {
-    visibility: visible;
 }
 
 .search {
     background: black;
     border: 1px solid #d8d8d845;
     color: #D8D8D8;
-    border-radius: 5px;
-    padding: 2px 5px;
-    margin-right: 11px;
+    padding: 20px 15px;
     transition: 200ms all ease-in;
-    max-width: 150px;
     opacity: 1;
     position: absolute;
-    right: 30px;
+    right: 0px;
+    left: 0px;
+    font-size: 18px;
+    pointer-events: all;
+    outline: none;
 
     &.hide {
-        max-width: 0;
         opacity: 0;
-        margin: 0;
-        padding: 2px 0;
+        pointer-events: none;
     }
 }
-

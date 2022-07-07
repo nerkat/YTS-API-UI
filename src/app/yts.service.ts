@@ -79,6 +79,7 @@ export class YtsService {
     this.$search
       .pipe(debounceTime(300))
       .subscribe(() => {
+        this.router.navigateByUrl('/search')
         this.movies = [];
         this.page = 0;
         this.movieCount = -1;
