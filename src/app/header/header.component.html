@@ -22,10 +22,17 @@
         </a>
     </li>
     <li>
-        <a>
-            <input class="search" #searchElement type="text" (blur)="showSearch=false" [ngClass]="{'hide': !showSearch}"
-                [(ngModel)]="ytsService.query" (keyup)="ytsService.$search.next(null)" (mousemove)="showSearch=true;searchElement.focus()" (mouseout)="showSearch=false">
-            <img class="search-icon" src="assets/images/search.svg" (mousemove)="showSearch=true;searchElement.focus()">
+        <a (click)="showSearch=true;searchElement.focus()">
+            <img src="assets/images/search.svg">
         </a>
     </li>
 </ul>
+
+
+<div class="search-container" [ngClass]="{'hide': !showSearch}">
+    <input class="search" #searchElement type="text" (blur)="showSearch=false" [(ngModel)]="ytsService.query"
+        (keyup)="ytsService.$search.next(null)" (mousemove)="showSearch=true;searchElement.focus()"
+        (mouseout)="showSearch=false">
+    <img class="close-icon" src="assets/images/close.svg" (mousemove)="showSearch=true;searchElement.focus()"
+        (click)="showSearch=false">
+</div>

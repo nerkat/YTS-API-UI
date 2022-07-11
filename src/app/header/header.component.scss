@@ -41,6 +41,7 @@ ul {
 
             img {
                 height: 24px;
+                cursor: pointer;
 
                 @media only screen and (max-width: 600px) {
                     height: 20px;
@@ -50,10 +51,7 @@ ul {
     }
 }
 
-.search-icon {
-    position: relative;
-    z-index: 1;
-}
+
 
 .search {
     background: black;
@@ -69,8 +67,40 @@ ul {
     pointer-events: all;
     outline: none;
 
+    @media only screen and (max-width: 600px) {
+        padding: 15px;
+    }
+
     &.hide {
         opacity: 0;
         pointer-events: none;
+    }
+}
+
+.search-container {
+    top: 0;
+    left: 0;
+    right: 0;
+    position: absolute;
+
+    &.hide {
+        opacity: 0;
+        top: -100px;
+        pointer-events: none;
+    }
+
+    .close-icon {
+        position: absolute;
+        z-index: 1;
+        top: 16px;
+        right: 26px;
+        height: 24px;
+        cursor: pointer;
+
+        @media only screen and (max-width: 600px) {
+            right: 21px;
+            top: 15px;
+            height: 20px;
+        }
     }
 }
