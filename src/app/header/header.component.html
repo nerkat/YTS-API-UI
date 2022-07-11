@@ -30,9 +30,8 @@
 
 
 <div class="search-container" [ngClass]="{'hide': !showSearch}">
-    <input class="search" #searchElement type="text" (blur)="showSearch=false" [(ngModel)]="ytsService.query"
-        (keyup)="ytsService.$search.next(null)" (mousemove)="showSearch=true;searchElement.focus()"
-        (mouseout)="showSearch=false">
+    <input class="search" #searchElement type="text" [(ngModel)]="ytsService.query" placeholder="Search..."
+        (keyup)="ytsService.$search.next(null)" (mousemove)="showSearch=true;searchElement.focus()">
     <img class="close-icon" src="assets/images/close.svg" (mousemove)="showSearch=true;searchElement.focus()"
         (click)="showSearch=false">
 </div>
