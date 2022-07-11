@@ -9,8 +9,8 @@ const routes: Routes = [
   { path: 'search', component: MovieListComponent },
   { path: 'favorites', component: MovieListComponent },
   { path: 'settings', component: SettingsComponent },
-  { path: '**', redirectTo: '/recent-releases', pathMatch: 'full' },
-  { path: '', redirectTo: '/recent-releases', pathMatch: 'full' }
+  { path: '**', redirectTo: 'recent-releases', pathMatch: 'full' },
+  { path: '', redirectTo: 'recent-releases', pathMatch: 'full' }
 
 ];
 

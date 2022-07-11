@@ -19,7 +19,11 @@ export class HeaderComponent implements OnInit {
       .subscribe(
         (event: NavigationEvent) => {
           if (event instanceof NavigationStart) {
-            
+
+            if (event.url == '/') {
+              return;
+            }
+
             //extract page title form route
             this.pageTitle = event.url.replace(/-/g, " ").slice(1);
           }

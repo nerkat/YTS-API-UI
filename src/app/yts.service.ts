@@ -32,7 +32,7 @@ export class YtsService {
             this.currentUrl = event.url;
 
             // recent releases data load
-            if (event.url == '/recent-releases') {
+            if (event.url == '/recent-releases' || event.url == '/') {
               this.movies = [];
               this.page = 0;
               this.sortBy = "date_added";
